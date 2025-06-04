@@ -36,9 +36,9 @@
 
     #wrapper {
   width: 100%;
-  max-width: 420px;
+  max-width: 100vw;
   margin: 0 auto;
-  padding: 0 12px;
+  padding: 0 5vw;
   box-sizing: border-box;
   overflow-x: hidden;
 }
@@ -82,15 +82,18 @@
     }
 
     #form-container, #qr-container {
-      width: 100%;
-      background: #ffffff;
-      padding: 1.5em 1em;
-      border-radius: 8px;
-      box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
-      display: none;
-      flex-direction: column;
-      align-items: center;
-    }
+  width: 100%;
+  background: #ffffff;
+  padding: 1.5em 1em;
+  border-radius: 8px;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+  max-width: 100%;
+  overflow-x: hidden;
+}
 
     #form-container.active, #qr-container.active {
       display: flex;
