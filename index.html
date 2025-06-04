@@ -2,6 +2,7 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>DX"MATSURI"入場者登録用QR生成</title>
   <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.1/build/qrcode.min.js"></script>
   <style>
@@ -13,7 +14,7 @@
       background-attachment: fixed;
       margin: 0;
       padding: 0;
-      height: 100vh;
+      min-height: 100vh;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -33,7 +34,9 @@
 
     #wrapper {
       width: 100%;
-      max-width: 600px;
+      max-width: 480px;
+      margin: 2em auto;
+      padding: 1em;
     }
 
     h2 {
@@ -55,16 +58,18 @@
     }
 
     input, select {
-      padding: 0.5em;
+      padding: 0.75em;
       font-size: 1em;
       border: 1px solid #ccc;
       border-radius: 4px;
+      width: 100%;
+      box-sizing: border-box;
     }
 
     #form-container, #qr-container {
       width: 100%;
       background: #ffffff;
-      padding: 2em;
+      padding: 1.5em 1em;
       border-radius: 8px;
       box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
       display: none;
@@ -85,6 +90,8 @@
       font-size: 1em;
       border-radius: 4px;
       cursor: pointer;
+      width: 100%;
+      box-sizing: border-box;
     }
 
     #generate-btn:hover, #back-btn:hover {
@@ -101,53 +108,6 @@
       color: #555;
       text-align: center;
       margin-top: 1em;
-    }
-      
-    @media screen and (max-width: 600px) {
-      body {
-        padding: 1em;
-        height: auto;
-        display: block;
-        background-image: url("background.jpg");
-        background-size: cover;
-        background-position: center;
-        background-attachment: fixed;
-      }
-
-      #wrapper {
-        margin: 2em auto;
-        padding: 0 1em;
-      }
-
-      #form-container, #qr-container {
-        padding: 1.5em 1em;
-      }
-
-      input, select {
-        font-size: 1em;
-      }
-
-      #generate-btn, #back-btn {
-        width: 100%;
-      }
-    }
-
-      #wrapper {
-        margin: 2em auto;
-        padding: 0 1em;
-      }
-
-      #form-container, #qr-container {
-        padding: 1.5em 1em;
-      }
-
-      input, select {
-        font-size: 1em;
-      }
-
-      #generate-btn, #back-btn {
-        width: 100%;
-      }
     }
   </style>
 </head>
