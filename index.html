@@ -17,7 +17,6 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      flex-direction: column;
       position: relative;
     }
 
@@ -30,6 +29,11 @@
       width: 100%;
       background-color: rgba(255, 255, 255, 0.7);
       z-index: -1;
+    }
+
+    #wrapper {
+      width: 100%;
+      max-width: 600px;
     }
 
     h2 {
@@ -59,14 +63,17 @@
 
     #form-container, #qr-container {
       width: 100%;
-      max-width: 500px;
       background: #ffffff;
       padding: 2em;
       border-radius: 8px;
       box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
-      display: flex;
+      display: none;
       flex-direction: column;
       align-items: center;
+    }
+
+    #form-container.active, #qr-container.active {
+      display: flex;
     }
 
     #generate-btn, #back-btn {
@@ -89,10 +96,6 @@
       text-align: center;
     }
 
-    .hidden {
-      display: none;
-    }
-
     .info-text {
       font-size: 0.95em;
       color: #555;
@@ -102,60 +105,61 @@
   </style>
 </head>
 <body>
+  <div id="wrapper">
+    <!-- 入力フォーム画面 -->
+    <div id="form-container" class="active">
+      <h2>DX"MATSURI"入場者登録用QR生成</h2>
 
-  <!-- 入力フォーム画面 -->
-  <div id="form-container">
-    <h2>DX"MATSURI"入場者登録用QR生成</h2>
+      <div class="form-group">
+        <label for="orgName">所属組織名</label>
+        <input id="orgName" type="text">
+      </div>
 
-    <div class="form-group">
-      <label for="orgName">所属組織名</label>
-      <input id="orgName" type="text">
+      <div class="form-group">
+        <label for="orgType">組織区分</label>
+        <select id="orgType">
+          <option value="" disabled selected>選択してください</option>
+          <option value="自治体">自治体</option>
+          <option value="民間企業">民間企業</option>
+          <option value="国機関">国機関</option>
+          <option value="その他">その他</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="deptName">所属部署名</label>
+        <input id="deptName" type="text">
+      </div>
+
+      <div class="form-group">
+        <label for="fullName">氏名</label>
+        <input id="fullName" type="text">
+      </div>
+
+      <div class="form-group">
+        <label for="position">職位</label>
+        <select id="position">
+          <option value="" disabled selected>選択してください</option>
+          <option value="管理職">管理職</option>
+          <option value="スタッフ">スタッフ</option>
+        </select>
+      </div>
+
+      <button id="generate-btn" onclick="generate()">QR生成</button>
     </div>
 
-    <div class="form-group">
-      <label for="orgType">組織区分</label>
-      <select id="orgType">
-        <option value="" disabled selected>選択してください</option>
-        <option value="自治体">自治体</option>
-        <option value="民間企業">民間企業</option>
-        <option value="国機関">国機関</option>
-        <option value="その他">その他</option>
-      </select>
+    <!-- QRコード表示画面 -->
+    <div id="qr-container">
+      <h2>受付用QRコード</h2>
+      <div id="qrcode"></div>
+
+      <div class="info-text">
+        当日は、受付で本QRコードの<br>
+        <strong>スクリーンショット画面</strong>または<strong>印刷した紙</strong>を御提示ください。
+      </div>
+
+      <button id="back-btn" onclick="goBack()">戻る</button>
     </div>
-
-    <div class="form-group">
-      <label for="deptName">所属部署名</label>
-      <input id="deptName" type="text">
-    </div>
-
-    <div class="form-group">
-      <label for="fullName">氏名</label>
-      <input id="fullName" type="text">
-    </div>
-
-    <div class="form-group">
-      <label for="position">職位</label>
-      <select id="position">
-        <option value="" disabled selected>選択してください</option>
-        <option value="管理職">管理職</option>
-        <option value="スタッフ">スタッフ</option>
-      </select>
-    </div>
-
-    <button id="generate-btn" onclick="generate()">QR生成</button>
-  </div>
-
-  <!-- QRコード表示画面 -->
-  <div id="qr-container" class="hidden">
-    <h2>受付用QRコード</h2>
-    <div id="qrcode"></div>
-
-    <div class="info-text">
-      当日は、受付で本QRコードの<br>
-      <strong>スクリーンショット画面</strong>または<strong>印刷した紙</strong>を御提示ください。
-    </div>
-
-    <button id="back-btn" onclick="goBack()">戻る</button>
   </div>
 
   <script>
@@ -181,17 +185,17 @@
           return;
         }
 
-        document.getElementById("form-container").classList.add("hidden");
+        document.getElementById("form-container").classList.remove("active");
         const qrArea = document.getElementById("qrcode");
         qrArea.innerHTML = "";
         qrArea.appendChild(canvas);
-        document.getElementById("qr-container").classList.remove("hidden");
+        document.getElementById("qr-container").classList.add("active");
       });
     }
 
     function goBack() {
-      document.getElementById("qr-container").classList.add("hidden");
-      document.getElementById("form-container").classList.remove("hidden");
+      document.getElementById("qr-container").classList.remove("active");
+      document.getElementById("form-container").classList.add("active");
     }
   </script>
 </body>
